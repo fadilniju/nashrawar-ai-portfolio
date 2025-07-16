@@ -1,5 +1,17 @@
 MIT License
 
+### Important Notes:
+1. **GitHub Pages Setup**:
+   - After creating the repo, go to Settings → Pages
+   - Set source to "Deploy from a branch"
+   - Select branch: `main` and folder: `/ (root)`
+   - Your site will be at: `https://<username>.github.io/nashrawar-ai-portfolio`
+
+2. **First Commit**:
+   ```bash
+   git add .
+   git commit -m "Initial portfolio commit"
+   git push origin main
 Copyright (c) 2025 Fadil p
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
