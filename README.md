@@ -24,7 +24,7 @@ Built with HTML, CSS, JavaScript, TailwindCSS, Anime.js, and Web3Forms.
 - Modern UI/UX
 
 ## Live Demo
-[View Portfolio](https://yourusername.github.io/nashrawar-ai-portfolio)
+[View Portfolio](https://fadilniju.github.io/nashrawar-ai-portfolio)
 
 ## Installation
 1. Clone the repository:
