@@ -3,7 +3,7 @@ AI Developer portfolio featuring cutting-edge tools: image generation, AI chat a
 # Nashrawar AI Portfolio
 
 [![GitHub license](https://img.shields.io/github/license/yourusername/nashrawar-ai-portfolio)](LICENSE)
-[![Website](https://img.shields.io/badge/live-demo-brightgreen)](https://yourusername.github.io/nashrawar-ai-portfolio)
+[![Website](https://img.shields.io/badge/live-demo-brightgreen)](https://fadilniju.github.io/nashrawar-ai-portfolio)
 
 Modern AI developer portfolio featuring interactive tools:
 - 🎨 AI Image Generator
