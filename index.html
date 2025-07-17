@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fadil Muhammed | AI & Full-Stack Developer</title>
-    <meta name="description" content="Award-winning AI developer specializing in cutting-edge solutions that drive business growth.">
-    <meta name="keywords" content="AI developer, web developer, portfolio, machine learning, full-stack">
-    <meta name="author" content="Fadil Muhammed">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #0a192f;
             --secondary: #64ffda;
-            --accent: #ff6b6b;
+            --accent: #8a2be2;
             --light: #ccd6f6;
             --dark: #020c1b;
             --text: #8892b0;
@@ -25,7 +23,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            cursor: none;
         }
         
         body {
@@ -35,42 +32,6 @@
             min-height: 100vh;
             line-height: 1.6;
             background-attachment: fixed;
-        }
-        
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--secondary);
-            mix-blend-mode: difference;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-        }
-        
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--secondary);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: all 0.2s ease;
-        }
-        
-        /* Particle Background Container */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
         }
         
         /* Custom Scrollbar */
@@ -100,13 +61,16 @@
             backdrop-filter: blur(10px);
             background: rgba(10, 25, 47, 0.9);
             border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         
         nav.scrolled {
-            padding: 15px 5%;
-            background: rgba(10, 25, 47, 0.95);
+            transform: translateY(0);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav.hidden {
+            transform: translateY(-100%);
         }
         
         .logo {
@@ -178,6 +142,7 @@
         .hero-content {
             max-width: 700px;
             z-index: 10;
+            padding-top: 80px;
         }
         
         .hero h1 {
@@ -278,12 +243,13 @@
         .profile-container:hover {
             transform: translateY(-50%) scale(1.03);
             box-shadow: 0 0 50px rgba(100, 255, 218, 0.3);
+            border-color: var(--accent);
         }
         
         .profile-image {
             width: 100%;
             height: 100%;
-            background: url('https://i.postimg.cc/sX4bvbpZ/photo-2025-07-16-16-33-34-removebg-preview.png') center/cover;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 191, 255, 0.2)), url('https://i.postimg.cc/sX4bvbpZ/photo-2025-07-16-16-33-34-removebg-preview.png') center/cover;
             position: relative;
         }
         
@@ -332,6 +298,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(100, 255, 218, 0.1);
             animation: fadeInUp 0.8s ease;
+            position: relative;
         }
         
         .project-card:hover {
@@ -343,7 +310,7 @@
         .project-img {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -381,6 +348,17 @@
             font-size: 0.9rem;
         }
         
+        /* 3D Motion Container */
+        .motion-container {
+            position: absolute;
+            top: 50%;
+            right: 5%;
+            width: 400px;
+            height: 400px;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        
         /* Skills Section */
         .skills-container {
             display: grid;
@@ -395,6 +373,12 @@
             padding: 30px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
         
         .skill-category h3 {
@@ -418,6 +402,47 @@
             padding: 8px 15px;
             border-radius: 4px;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .skill:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Stats Section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 1.1rem;
+            color: var(--text);
         }
         
         /* AI Tools Section */
@@ -437,7 +462,8 @@
         }
         
         .tool-card:hover {
-            border-color: var(--secondary);
+            border-color: var(--accent);
+            transform: translateY(-5px);
         }
         
         .tool-header {
@@ -487,7 +513,7 @@
         
         .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
             outline: none;
-            border-color: var(--secondary);
+            border-color: var(--accent);
         }
         
         .input-group textarea {
@@ -504,30 +530,6 @@
         .input-row .input-group {
             flex: 1;
             margin-bottom: 0;
-        }
-        
-        .style-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .style-option {
-            padding: 10px;
-            background: rgba(10, 25, 47, 0.5);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-radius: 4px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text);
-        }
-        
-        .style-option:hover, .style-option.active {
-            background: rgba(100, 255, 218, 0.1);
-            border-color: var(--secondary);
-            color: var(--text-light);
         }
         
         .result-container {
@@ -596,32 +598,6 @@
             margin-bottom: 15px;
         }
         
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .gallery-item {
-            height: 150px;
-            border-radius: 4px;
-            overflow: hidden;
-            background: rgba(10, 25, 47, 0.5);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
         /* Contact Section */
         .contact-container {
             display: grid;
@@ -645,12 +621,19 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: var(--secondary);
-            color: var(--dark);
+            background: var(--accent);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: rotate(10deg);
         }
         
         .contact-text h3 {
@@ -666,7 +649,7 @@
         }
         
         .contact-text a:hover {
-            color: var(--secondary);
+            color: var(--accent);
         }
         
         .contact-form {
@@ -693,41 +676,6 @@
             border-radius: 4px;
             color: var(--text-light);
             font-size: 1rem;
-        }
-        
-        /* Stats Section */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        
-        .stat-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--secondary);
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 10px;
-        }
-        
-        .stat-text {
-            font-size: 1.1rem;
-            color: var(--text);
         }
         
         /* Footer */
@@ -761,9 +709,10 @@
         }
         
         .social-links a:hover {
-            background: var(--secondary);
-            color: var(--dark);
+            background: var(--accent);
+            color: white;
             transform: translateY(-5px);
+            border-color: var(--accent);
         }
         
         .copyright {
@@ -775,7 +724,13 @@
         .credits {
             margin-top: 15px;
             font-size: 0.9rem;
-            color: rgba(204, 214, 246, 0.7);
+            color: var(--text);
+        }
+        
+        .deepseek-credit {
+            animation: colorShift 3s infinite alternate;
+            text-decoration: none;
+            font-weight: 600;
         }
         
         /* Animations */
@@ -816,9 +771,30 @@
             to { text-shadow: 0 0 20px var(--secondary), 0 0 30px var(--secondary); }
         }
         
+        @keyframes colorShift {
+            0% { color: var(--secondary); }
+            33% { color: var(--accent); }
+            66% { color: #00bfff; }
+            100% { color: var(--secondary); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
         /* Responsive */
         @media (max-width: 1200px) {
             .profile-container {
+                width: 300px;
+                height: 300px;
+            }
+            .motion-container {
                 width: 300px;
                 height: 300px;
             }
@@ -833,6 +809,7 @@
             
             .hero-content {
                 margin-bottom: 50px;
+                padding-top: 0;
             }
             
             .profile-container {
@@ -841,6 +818,10 @@
                 top: auto;
                 transform: none;
                 margin: 0 auto;
+            }
+            
+            .motion-container {
+                display: none;
             }
             
             .contact-container {
@@ -893,20 +874,12 @@
             .tools-container {
                 grid-template-columns: 1fr;
             }
-            
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
         }
         
         @media (max-width: 576px) {
             .input-row {
                 flex-direction: column;
                 gap: 15px;
-            }
-            
-            .style-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
             
             .profile-container {
@@ -917,13 +890,6 @@
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    
     <!-- Navigation -->
     <nav id="navbar">
         <div class="logo">
@@ -959,9 +925,12 @@
         </div>
         
         <!-- Profile Cutout -->
-        <div class="profile-container">
+        <div class="profile-container floating">
             <div class="profile-image"></div>
         </div>
+        
+        <!-- Motion Effect Container -->
+        <div class="motion-container" id="motion-container"></div>
     </section>
     
     <!-- Skills Section -->
@@ -969,7 +938,7 @@
         <h2 class="section-title">Technical Expertise</h2>
         
         <div class="skills-container">
-            <div class="skill-category">
+            <div class="skill-category floating" style="animation-delay: 0.2s;">
                 <h3><i class="fas fa-brain"></i> AI & Machine Learning</h3>
                 <div class="skill-list">
                     <span class="skill">Computer Vision</span>
@@ -981,7 +950,7 @@
                 </div>
             </div>
             
-            <div class="skill-category">
+            <div class="skill-category floating" style="animation-delay: 0.4s;">
                 <h3><i class="fas fa-laptop-code"></i> Frontend Development</h3>
                 <div class="skill-list">
                     <span class="skill">React</span>
@@ -993,7 +962,7 @@
                 </div>
             </div>
             
-            <div class="skill-category">
+            <div class="skill-category floating" style="animation-delay: 0.6s;">
                 <h3><i class="fas fa-server"></i> Backend & DevOps</h3>
                 <div class="skill-list">
                     <span class="skill">Node.js</span>
@@ -1009,22 +978,22 @@
         <h3 class="section-title" style="margin-top: 80px;">Impact Metrics</h3>
         
         <div class="stats-container">
-            <div class="stat-card">
+            <div class="stat-card floating" style="animation-delay: 0.1s;">
                 <div class="stat-number">15+</div>
                 <div class="stat-text">AI Projects Deployed</div>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card floating" style="animation-delay: 0.3s;">
                 <div class="stat-number">40%</div>
                 <div class="stat-text">Average Efficiency Gain</div>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card floating" style="animation-delay: 0.5s;">
                 <div class="stat-number">99.8%</div>
                 <div class="stat-text">System Uptime</div>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card floating" style="animation-delay: 0.7s;">
                 <div class="stat-number">100%</div>
                 <div class="stat-text">Client Satisfaction</div>
             </div>
@@ -1036,7 +1005,7 @@
         <h2 class="section-title">Featured Projects</h2>
         
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card floating" style="animation-delay: 0.2s;">
                 <div class="project-img">
                     <i class="fab fa-telegram"></i>
                 </div>
@@ -1053,7 +1022,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card floating" style="animation-delay: 0.4s;">
                 <div class="project-img">
                     <i class="fas fa-brain"></i>
                 </div>
@@ -1070,7 +1039,7 @@
                 </div>
             </div>
             
-            <div class="project-card">
+            <div class="project-card floating" style="animation-delay: 0.6s;">
                 <div class="project-img">
                     <i class="fas fa-chart-network"></i>
                 </div>
@@ -1108,39 +1077,6 @@
                     <textarea id="image-prompt" placeholder="What image would you like to create?">futuristic city at night with neon lights</textarea>
                 </div>
                 
-                <div class="input-group">
-                    <label>Style Enhancement</label>
-                    <div class="style-grid">
-                        <div class="style-option active">Photorealism</div>
-                        <div class="style-option">3D Art</div>
-                        <div class="style-option">Futuristic</div>
-                        <div class="style-option">Anime</div>
-                        <div class="style-option">Cyberpunk</div>
-                        <div class="style-option">Painting</div>
-                    </div>
-                </div>
-                
-                <div class="input-row">
-                    <div class="input-group">
-                        <label for="image-width">Resolution</label>
-                        <select id="image-width">
-                            <option value="512">512px</option>
-                            <option value="768" selected>768px</option>
-                            <option value="1024">1024px</option>
-                        </select>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="image-model">AI Model</label>
-                        <select id="image-model">
-                            <option value="flux">Flux</option>
-                            <option value="flux-realism">Realism</option>
-                            <option value="any-dark">Dark</option>
-                            <option value="flux-anime">Anime</option>
-                        </select>
-                    </div>
-                </div>
-                
                 <button class="btn" onclick="generateImage()">Generate Image</button>
                 
                 <div class="result-container" id="image-result">
@@ -1150,33 +1086,6 @@
                     </div>
                     <p>Your AI-generated image will appear here</p>
                     <button class="download-btn" id="image-download">Download Image</button>
-                </div>
-            </div>
-            
-            <!-- AI Chat Assistant -->
-            <div class="tool-card">
-                <div class="tool-header">
-                    <div class="tool-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>AI Assistant</h3>
-                </div>
-                
-                <div class="result-container" style="min-height: 300px; flex-direction: column; align-items: stretch;">
-                    <div class="chat-history" id="chat-history" style="overflow-y: auto; max-height: 250px; padding: 10px;">
-                        <div class="message bot-message" style="background: rgba(100, 255, 218, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                            🤖 Hello! I'm Fadil's AI assistant. How can I help you today?
-                        </div>
-                        <div class="message bot-message" style="background: rgba(100, 255, 218, 0.1); padding: 10px; border-radius: 8px;">
-                            💡 Try asking about my technical skills, project experience, or how I can help your business.
-                        </div>
-                    </div>
-                    <div class="input-group" style="margin-top: auto;">
-                        <div class="input-row">
-                            <input type="text" class="chat-input" id="chat-input" placeholder="Ask about my qualifications...">
-                            <button class="btn" onclick="sendMessage()" style="padding: 0 20px; height: 50px;"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -1209,6 +1118,11 @@
                 
                 <div class="input-group">
                     <button class="btn secondary" id="download-voice" style="width: 100%; display: none;">Download Audio</button>
+                </div>
+                
+                <div class="result-container" id="voice-result">
+                    <p>Your generated audio will appear here</p>
+                    <audio id="audio-player" controls style="display: none;"></audio>
                 </div>
             </div>
         </div>
@@ -1286,11 +1200,6 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" name="company" placeholder="Your company">
-                    </div>
-                    
-                    <div class="form-group">
                         <label for="message">How can I help?</label>
                         <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
                     </div>
@@ -1304,26 +1213,21 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="https://www.instagram.com/nashrawar" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/NashrawarAIBot" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/fadilniju" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="t.me/HEREFADIL" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="x.com/HEREFADIL" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="www.instagram.com/nashrawar" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         
         <div class="copyright">© 2023 Fadil Muhammed | AI Developer from Malabar</div>
-        <div class="credits">Designed to impress hiring managers and win projects</div>
+        <div class="credits">Built with ❤️ using <span class="deepseek-credit">Three.js</span>, <span class="deepseek-credit">Pollinations.ai</span>, and <a href="https://www.deepseek.com" target="_blank" class="deepseek-credit">DeepSeek v3 by Nashrawar</a></div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize custom cursor
-            initCursor();
-            
-            // Initialize particle background
-            initParticles();
+            // Initialize motion animation
+            initMotion();
             
             // Mobile menu toggle
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -1335,21 +1239,23 @@
             
             // Navbar scroll effect
             const navbar = document.getElementById('navbar');
+            let lastScrollY = window.scrollY;
+            
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
-            });
-            
-            // Style selection
-            const styleOptions = document.querySelectorAll('.style-option');
-            styleOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    styleOptions.forEach(opt => opt.classList.remove('active'));
-                    option.classList.add('active');
-                });
+                
+                // Hide navbar on scroll down, show on scroll up
+                if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                    navbar.classList.add('hidden');
+                } else {
+                    navbar.classList.remove('hidden');
+                }
+                
+                lastScrollY = window.scrollY;
             });
             
             // Smooth scrolling for navigation links
@@ -1382,161 +1288,134 @@
             });
         });
         
-        // Custom cursor effect
-        function initCursor() {
-            const cursor = document.querySelector('.cursor');
-            const follower = document.querySelector('.cursor-follower');
+        // Motion Animation
+        function initMotion() {
+            const container = document.getElementById('motion-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             
-            document.addEventListener('mousemove', function(e) {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                
-                setTimeout(function() {
-                    follower.style.left = e.clientX + 'px';
-                    follower.style.top = e.clientY + 'px';
-                }, 100);
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            container.appendChild(renderer.domElement);
+            
+            // Create a complex geometric shape
+            const geometry = new THREE.IcosahedronGeometry(5, 1);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: 0x8a2be2,
+                emissive: 0x00bfff,
+                shininess: 100,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.8
             });
             
-            // Add glitter effect
-            setInterval(() => {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.position = 'fixed';
-                sparkle.style.left = cursor.style.left;
-                sparkle.style.top = cursor.style.top;
-                sparkle.style.width = '5px';
-                sparkle.style.height = '5px';
-                sparkle.style.backgroundColor = '#64ffda';
-                sparkle.style.borderRadius = '50%';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.zIndex = '9999';
-                sparkle.style.animation = 'sparkleFade 0.5s forwards';
+            const shape = new THREE.Mesh(geometry, material);
+            scene.add(shape);
+            
+            // Add smaller inner shape
+            const innerGeometry = new THREE.IcosahedronGeometry(3, 1);
+            const innerMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0x64ffda,
+                emissive: 0x00bfff,
+                shininess: 100,
+                wireframe: true
+            });
+            
+            const innerShape = new THREE.Mesh(innerGeometry, innerMaterial);
+            scene.add(innerShape);
+            
+            // Add particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 20;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                color: 0x64ffda,
+                transparent: true
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            const pointLight = new THREE.PointLight(0x64ffda, 1, 100);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+            
+            camera.position.z = 15;
+            camera.position.y = 5;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
                 
-                document.body.appendChild(sparkle);
+                // Rotate shapes
+                shape.rotation.x += 0.005;
+                shape.rotation.y += 0.008;
                 
-                setTimeout(() => {
-                    document.body.removeChild(sparkle);
-                }, 500);
-            }, 300);
-        }
-        
-        // Particle Background
-        function initParticles() {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#64ffda"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#64ffda",
-                        "opacity": 0.2,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        }
-                    }
-                },
-                "retina_detect": true
+                innerShape.rotation.x += 0.007;
+                innerShape.rotation.y += 0.005;
+                
+                // Animate particles
+                const positions = particlesGeometry.attributes.position.array;
+                for (let i = 0; i < particlesCount * 3; i += 3) {
+                    positions[i] += (Math.random() - 0.5) * 0.1;
+                    positions[i + 1] += (Math.random() - 0.5) * 0.1;
+                    positions[i + 2] += (Math.random() - 0.5) * 0.1;
+                    
+                    // Reset particles that drift too far
+                    if (Math.abs(positions[i]) > 10) positions[i] = (Math.random() - 0.5) * 20;
+                    if (Math.abs(positions[i + 1]) > 10) positions[i + 1] = (Math.random() - 0.5) * 20;
+                    if (Math.abs(positions[i + 2]) > 10) positions[i + 2] = (Math.random() - 0.5) * 20;
+                }
+                
+                particlesGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.offsetWidth / container.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.offsetWidth, container.offsetHeight);
             });
         }
         
-        // Generate image function - WORKING
+        // Generate image function
         function generateImage() {
             const prompt = document.getElementById('image-prompt').value;
             if (!prompt) return;
             
             const resultDiv = document.getElementById('image-result');
             const loading = document.getElementById('image-loading');
-            const width = document.getElementById('image-width').value;
-            const model = document.getElementById('image-model').value;
-            const style = document.querySelector('.style-option.active').textContent;
+            
+            // Clear previous result
+            resultDiv.innerHTML = '<div class="loading active" id="image-loading"><div class="spinner"></div><p>Creating your AI masterpiece...</p></div><p>Your AI-generated image will appear here</p>';
+            loading = document.getElementById('image-loading');
             
             // Show loading
             loading.classList.add('active');
             
-            // Enhance prompt with selected style
-            let enhancedPrompt = prompt;
-            if (style === 'Photorealism') enhancedPrompt += ", photorealistic, detailed textures, natural lighting";
-            else if (style === '3D Art') enhancedPrompt += ", 3D render, blender, octane render, volumetric lighting";
-            else if (style === 'Futuristic') enhancedPrompt += ", futuristic, sci-fi, advanced technology, neon lights";
-            else if (style === 'Anime') enhancedPrompt += ", anime style, vibrant colors, detailed background, studio ghibli";
-            else if (style === 'Cyberpunk') enhancedPrompt += ", cyberpunk, neon lights, rainy night, futuristic city";
-            else if (style === 'Painting') enhancedPrompt += ", oil painting, brush strokes, artistic, canvas texture";
-            
             // Use Pollinations API
-            const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(enhancedPrompt)}?width=${width}&model=${model}&nologo=true`;
+            const encodedPrompt = encodeURIComponent(prompt);
+            const apiUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`;
             
             // Simulate API call with actual image generation
             setTimeout(() => {
@@ -1569,76 +1448,7 @@
             }, 2000);
         }
         
-        // Chat function using Pollinations API
-        async function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            const chatHistory = document.getElementById('chat-history');
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'message user-message';
-            userMessage.style.background = 'rgba(10, 25, 47, 0.5)';
-            userMessage.style.padding = '10px';
-            userMessage.style.borderRadius = '8px';
-            userMessage.style.marginBottom = '10px';
-            userMessage.style.alignSelf = 'flex-end';
-            userMessage.textContent = `👤 ${message}`;
-            chatHistory.appendChild(userMessage);
-            
-            // Clear input
-            input.value = '';
-            
-            // Add loading indicator
-            const loading = document.createElement('div');
-            loading.className = 'message bot-message';
-            loading.style.background = 'rgba(100, 255, 218, 0.1)';
-            loading.style.padding = '10px';
-            loading.style.borderRadius = '8px';
-            loading.style.marginBottom = '10px';
-            loading.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Crafting response...';
-            chatHistory.appendChild(loading);
-            
-            // Scroll to bottom
-            chatHistory.scrollTop = chatHistory.scrollHeight;
-            
-            try {
-                // Use Pollinations text API
-                const response = await fetch(`https://text.pollinations.ai/prompt/${encodeURIComponent(message)}`);
-                const botText = await response.text();
-                
-                // Remove loading
-                chatHistory.removeChild(loading);
-                
-                // Add bot response
-                const botMessage = document.createElement('div');
-                botMessage.className = 'message bot-message';
-                botMessage.style.background = 'rgba(100, 255, 218, 0.1)';
-                botMessage.style.padding = '10px';
-                botMessage.style.borderRadius = '8px';
-                botMessage.style.marginBottom = '10px';
-                botMessage.textContent = `🤖 ${botText}`;
-                chatHistory.appendChild(botMessage);
-                
-                // Scroll to bottom again
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-            } catch (error) {
-                chatHistory.removeChild(loading);
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'message bot-message';
-                errorMessage.style.background = 'rgba(255, 107, 107, 0.1)';
-                errorMessage.style.padding = '10px';
-                errorMessage.style.borderRadius = '8px';
-                errorMessage.style.marginBottom = '10px';
-                errorMessage.textContent = '❌ Error: Could not get response from AI';
-                chatHistory.appendChild(errorMessage);
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-            }
-        }
-        
-        // Voice Generator
+        // Voice Generator using Web Speech API
         function generateVoice() {
             const text = document.getElementById('voice-text').value;
             if (!text) return;
@@ -1646,12 +1456,32 @@
             const voiceType = document.getElementById('voice-voice').value;
             const playBtn = document.getElementById('play-voice');
             const downloadBtn = document.getElementById('download-voice');
+            const resultDiv = document.getElementById('voice-result');
+            const audioPlayer = document.getElementById('audio-player');
             
-            // Generate a unique filename
-            const filename = `voice-${Date.now()}.mp3`;
+            // Clear previous result
+            resultDiv.innerHTML = '<p>Generating voice...</p><audio id="audio-player" controls style="display: none;"></audio>';
+            audioPlayer = document.getElementById('audio-player');
             
-            // In a real implementation, this would use a TTS API
-            // For demo, we'll simulate the process
+            // Use Web Speech API
+            const speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;
+            
+            // Set voice type
+            const voices = window.speechSynthesis.getVoices();
+            const selectedVoice = voices.find(voice => 
+                voiceType === 'male' ? voice.name.includes('Male') : voice.name.includes('Female')
+            );
+            
+            if (selectedVoice) {
+                speech.voice = selectedVoice;
+            }
+            
+            // Play the speech
+            window.speechSynthesis.speak(speech);
             
             // Show the buttons
             playBtn.style.display = 'inline-block';
@@ -1659,24 +1489,12 @@
             
             // Set up the buttons
             playBtn.onclick = function() {
-                alert(`Playing generated voice for: "${text}"`);
+                window.speechSynthesis.speak(speech);
             };
             
-            downloadBtn.onclick = function() {
-                // In a real implementation, this would download the audio file
-                alert(`Downloading voice file: ${filename}`);
-            };
+            // Update result message
+            resultDiv.innerHTML = `<p>Playing generated voice for: "${text}"</p><audio id="audio-player" controls style="display: none;"></audio>`;
         }
-        
-        // Sparkle animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes sparkleFade {
-                0% { transform: scale(1); opacity: 1; }
-                100% { transform: scale(3); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
